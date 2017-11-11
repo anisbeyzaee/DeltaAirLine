@@ -4,7 +4,7 @@
  *  Created on: Oct 22, 2017
  *      Author: Anis
  */
-
+ // TravelBooking System is in charge of operations regarding the booking system such as adding, deleting and listing passengers
 #ifndef TRAVELBOOKINGSYSTEM_H_
 #define TRAVELBOOKINGSYSTEM_H_
 
@@ -27,7 +27,7 @@ public:
 		string searchPassenger(string firstname, string lastname);
 		void listPassenger(int flightnumber);
 		int indexFinder(int flightnumber);
-
+		void printFlight(int flightnumber);
 private :
 		OrderedLinkedList<Passenger> *mpPassengerlist; 	// a list of passengers
 };
