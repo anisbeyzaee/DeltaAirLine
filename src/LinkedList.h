@@ -23,6 +23,7 @@ class LinkedList{
 		int length();
 		T front();
 		T back();
+		void copyList(LinkedList<T>&);
 		void inserFirst(T&);
 		void inserLast(T&);
 		void deleteNote(T&);
@@ -115,12 +116,36 @@ void LinkedList<T>::destroylist(){
 	last = NULL;
 	count = 0;
 }
+
+
 template <class T>
 LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>& list){
-	if(this!= &list){
-		copylist(list);
+	if(this != &list){
+		copyList(list);
 	}
 	return *this;
+}
+
+template <class T>
+void  LinkedList<T>::copyList(LinkedList<T>& RHS){
+	if(!isEmpty()){ // if I'm NOT empty
+		destroylist(); // empty me
+	}	
+	if(RHS.head == NULL) return;
+	this->head = new node<T>;
+	this->head->data = RHS.head->data;
+	this->head->next = NULL;
+	node<T>* LHS_current = this->head;
+	node<T>* RHS_current = RHS.head->next;
+	while(RHS_current != NULL){
+		LHS_current->next = new node<T>;
+		LHS_current = LHS_current->next;
+		LHS_current->next = NULL;
+		LHS_current->data = RHS_current->data;
+
+		RHS_current = RHS_current->next;
+	}
+	//this->head = LHS_head; // <----
 }
 template <class T>
 ostream& operator<<(ostream& os, LinkedList<T>& list){
@@ -129,7 +154,7 @@ ostream& operator<<(ostream& os, LinkedList<T>& list){
 		os<<p->data<<" "<<endl;
 		p = p->next;
 	}
-
+    return os;
 }
 
 template <class T>
